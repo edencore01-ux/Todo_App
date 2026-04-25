@@ -1,0 +1,307 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Page background */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /*background: linear-gradient(135deg, #5f9cff, #7b5cff);*/
+    background:
+        linear-gradient(rgba(108, 92, 231, 0.7), rgba(108, 92, 231, 0.7)),
+        url('ChatGPT Image Apr 4, 2026, 07_54_25 AM.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main container */
+/* The Outer Wrapper */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    margin: 20px auto;
+    display: flex;
+    padding: 6px;
+    /* Increase this to 8px or 10px to make the border THICKER */
+    background: #000;
+    /* A dark background makes the LEDs pop more */
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 0;
+    /* This adds a glow that bleeds OUTSIDE the box */
+    box-shadow: 0 0 25px rgba(108, 92, 231, 0.4);
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+
+    /* High-Contrast Rainbow Comet */
+    background: conic-gradient(#6c5ce7,
+            /* Purple */
+            #00cec9,
+            /* Teal */
+            #55efc4,
+            /* Mint */
+            #ffeaa7,
+            /* Yellow */
+            #fab1a0,
+            /* Coral */
+            #ff7675,
+            /* Pink */
+            #6c5ce7
+            /* Purple (MUST match the first color to loop) */
+        );
+
+    animation: spin-led 3s linear infinite;
+    /* Faster speed (3s) feels more "alive" */
+
+    /* This makes the light bleed INSIDE the border */
+    filter: blur(5px);
+    z-index: -1;
+}
+
+@keyframes spin-led {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.content {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 18px;
+    z-index: 1;
+}
+
+/* Title */
+.container p {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* List styling */
+ul {
+    list-style: none;
+}
+
+/* Each todo item */
+li {
+    background: #f5f7ff;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: 0.2s ease;
+}
+
+/* Hover effect */
+li:hover {
+    background: #e6ebff;
+    transform: translateX(5px);
+}
+
+/* Link styling */
+a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    display: block;
+}
+
+/* subtle timestamp style */
+a small {
+    color: #888;
+    font-size: 12px;
+}
+
+/* The Main Button */
+.add-main-btn {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+/* Modal Overlay (Background Dim) */
+/* Styling the form inside the modal */
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #2d3436;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.modal-content .add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: none;
+    /* Remove shadow since the modal has one */
+    padding: 0;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #f1f2f6;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+/* Glow effect when clicking an input */
+.modal-content input:focus,
+.modal-content textarea:focus {
+    border-color: #6c5ce7;
+}
+
+.modal-content textarea {
+    height: 100px;
+    resize: none;
+    /* Keeps the look clean */
+}
+
+/* The Save Button */
+.save-btn {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.save-btn:hover {
+    background: #a29bfe;
+    transform: translateY(-2px);
+}
+
+#todo-form-modal {
+    margin-bottom: 20px;
+}
+
+/* 1. The Background Dim (The "Overlay") */
+.modal-overlay {
+    position: fixed;
+    /* Always stays in the same spot on screen */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    /* Full width of the viewport */
+    height: 100vh;
+    /* Full height of the viewport */
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black */
+    backdrop-filter: blur(8px);
+    /* Modern "frosted glass" effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* High number to stay ABOVE everything else */
+    animation: fadeIn 0.3s ease;
+}
+
+/* 2. The Pop-Out Card */
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: scale(0.9);
+    /* Start slightly smaller for the "pop" effect */
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* 3. The "Pop" Animation */
+@keyframes popIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Mobile Devices (Phones) */
+@media (max-width: 600px) {
+
+    .container,
+    .details-card {
+        width: 95%;
+        /* Take up almost the whole screen width */
+        max-width: none;
+        /* Remove the 550px limit */
+        margin: 10px auto;
+        padding: 5px;
+        /* Slightly thinner LED border for mobile */
+    }
+
+    .content {
+        padding: 15px;
+        /* Less padding inside so text has more room */
+    }
+
+    h1,
+    h2 {
+        font-size: 1.5rem;
+        /* Shrink headers so they don't wrap weirdly */
+    }
+}
+
+@media (max-width: 600px) {
+    .button-group {
+        flex-direction: column;
+        /* Stack "Back" and "Delete" buttons vertically */
+        gap: 10px;
+    }
+
+    .save-btn,
+    .edit-btn,
+    .delete-btn {
+        width: 100%;
+        /* Make buttons big and easy to click */
+    }
+}

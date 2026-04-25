@@ -1,0 +1,318 @@
+/* Container to center everything */
+.details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+/* The Card */
+.details-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.details-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Header & Title */
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.details-header h1 {
+    font-size: 1.8rem;
+    color: #2d3436;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Status Badge */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.complete {
+    background: #e3fcef;
+    color: #00b894;
+}
+
+.status-badge.pending {
+    background: #fff4e5;
+    color: #ff9f43;
+}
+
+/* Body Styling */
+.details-body label {
+    display: block;
+    font-size: 0.75rem;
+    color: #636e72;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.description {
+    font-size: 1.1rem;
+    color: #485e6b;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.meta-info {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+/* Footer & Button */
+/* Center the footer area */
+.details-footer {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Row for Back and Delete */
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #636e72;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #2d3436;
+}
+
+/* Keeping your Red Background for Delete */
+.delete-btn {
+    background: #ff7675;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 10px rgba(255, 118, 117, 0.3);
+}
+
+.delete-btn:hover {
+    background: #d63031;
+    transform: translateY(-2px);
+}
+
+/* Transforming the "Mark as Completed" into a button-link */
+.toggle-link {
+    text-decoration: none;
+    color: #6c5ce7;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 2px solid #6c5ce7;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.toggle-link:hover {
+    background: #6c5ce7;
+    color: white;
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.2);
+}
+
+/* Specific styling for the Edit Button */
+.edit-btn {
+    background-color: #74b9ff !important;
+    /* Soft blue */
+    color: white !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(116, 185, 255, 0.3);
+    display: inline-block;
+}
+
+.edit-btn:hover {
+    background-color: #0984e3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(9, 132, 227, 0.4);
+}
+
+/* Ensure labels in the modal look clean */
+.modal-content label {
+    display: block;
+    font-size: 0.8rem;
+    color: #636e72;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    /* Pushes Edit Task to the right */
+    align-items: center;
+    /* Keeps them vertically aligned */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f1f2f6;
+    padding-bottom: 10px;
+}
+
+/* Ensure the label doesn't have extra bottom margin now */
+.section-header label {
+    margin-bottom: 0;
+    font-weight: 700;
+    color: #636e72;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+/* 1. The Background Dim (The "Overlay") */
+.modal-overlay {
+    position: fixed;
+    /* Always stays in the same spot on screen */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    /* Full width of the viewport */
+    height: 100vh;
+    /* Full height of the viewport */
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black */
+    backdrop-filter: blur(8px);
+    /* Modern "frosted glass" effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* High number to stay ABOVE everything else */
+    animation: fadeIn 0.3s ease;
+}
+
+/* 2. The Pop-Out Card */
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: scale(0.9);
+    /* Start slightly smaller for the "pop" effect */
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* 3. The "Pop" Animation */
+@keyframes popIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Mobile Adjustments for Details Page */
+@media (max-width: 600px) {
+    .details-container {
+        padding: 10px;
+        /* Give it some breathing room from the screen edge */
+        width: 100%;
+    }
+
+    .details-card {
+        padding: 20px;
+        /* Slightly less padding so the text isn't squeezed */
+        width: 100%;
+        border-radius: 15px;
+        /* Softer corners for mobile */
+    }
+
+    /* 1. Stack the Header (Title & Status) */
+    .details-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* 2. Make the Buttons Stacked and Full-Width */
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        /* Stack Back and Delete buttons */
+        width: 100%;
+        gap: 12px;
+    }
+
+    .back-link,
+    .delete-btn,
+    .edit-btn {
+        width: 100%;
+        /* Big touch targets for thumbs */
+        text-align: center;
+        padding: 14px;
+        /* Easier to tap */
+    }
+
+    /* 3. Handle Long Text */
+    .details-body p {
+        font-size: 16px;
+        /* Ensure text is readable without zooming */
+        line-height: 1.6;
+        word-wrap: break-word;
+        /* Prevents long words from breaking the layout */
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+        /* Take up the whole width of the phone */
+        padding: 20px;
+        /* Bring the form fields closer to the edge */
+        margin: 0 10px;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+        font-size: 16px;
+        /* Prevents iOS from "auto-zooming" when you tap an input */
+    }
+}

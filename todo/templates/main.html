@@ -1,0 +1,63 @@
+{% extends "master.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+
+<link rel="stylesheet" href="{% static 'global.css' %}">
+{% block extra_css %}{% endblock %}
+{% block title %} Todo App {% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="content">
+        <p>Welcome to the todo app</p>
+        <div class="header-action">
+            <button id="show-form-btn" class="add-main-btn">+ Add New Task</button>
+        </div>
+
+        <div id="todo-form-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-content">
+                <span id="close-form" class="close-btn">&times;</span>
+                <h3>Create New Todo</h3>
+                <form action="/todo/add/" method="POST" class="add-form">
+                    {% csrf_token %}
+                    <input type="text" name="title" placeholder="What needs to be done?" required>
+                    <textarea name="description" placeholder="Details (optional)"></textarea>
+                    <button type="submit" class="save-btn">Save Todo</button>
+                </form>
+            </div>
+        </div>
+        <ul>
+            {% for x in mytodos %}
+            <li><a href="details/{{x.id}}">{{x.title}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<script>
+    const modal = document.getElementById('todo-form-modal');
+    const openBtn = document.getElementById('show-form-btn');
+    const closeBtn = document.getElementById('close-form');
+
+    // Show the form
+    openBtn.onclick = function () {
+        modal.style.display = "flex";
+    }
+
+    // Hide the form when clicking (x)
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Hide the form if user clicks outside the box
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+{% endblock %}
+
+</html>
