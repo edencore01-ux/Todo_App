@@ -127,3 +127,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     BASE_DIR / 'todolist'/'mystaticfiles'
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://web-production-da068.up.railway.app"
+]
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

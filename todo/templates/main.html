@@ -21,7 +21,7 @@
             <div class="modal-content">
                 <span id="close-form" class="close-btn">&times;</span>
                 <h3>Create New Todo</h3>
-                <form action="/todo/add/" method="POST" class="add-form">
+                <form action="{% url 'add_todo' %}" method="POST" class="add-form">
                     {% csrf_token %}
                     <input type="text" name="title" placeholder="What needs to be done?" required>
                     <textarea name="description" placeholder="Details (optional)"></textarea>
