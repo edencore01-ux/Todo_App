@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from .models import todos
 # Create your views here.
 
@@ -53,3 +56,44 @@ def edit_todo(request, id):
 def home(request):
     todo = todos.objects.filter(user=request.user)
     return render(request, 'main.html', {"todo": todo})
+def login_view(request):
+    if request.method == 'POST':
+        # Get the data from the 'name' attributes in your HTML
+        u_name = request.POST.get('username')
+        p_word = request.POST.get('password')
+
+        # Check if these credentials are correct
+        user = authenticate(request, username=u_name, password=p_word)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, f"Welcome back, {user.username}!")
+            return redirect('home')  # Make sure you have a URL named 'home'
+        else:
+            # If authentication fails
+            messages.error(request, "Invalid username or password. Please try again.")
+            return render(request, 'registration/login.html')
+
+    # If it's a GET request, just show the page
+    return render(request, 'registration/login.html')
+
+def signup_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        # Simple check if user already exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "A user with this email already exists.")
+            return redirect('login') # or wherever your login page is
+        
+        # Create the user in the database
+        # Note: We use email as the username here for simplicity
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.save()
+        
+        messages.success(request, "Account created successfully!")
+        return redirect('login') 
+    
+    return render(request, 'registration/login.html')
