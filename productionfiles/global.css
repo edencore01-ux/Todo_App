@@ -243,6 +243,7 @@ a small {
     max-width: 450px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     position: relative;
+    margin: auto;
     transform: scale(0.9);
     /* Start slightly smaller for the "pop" effect */
     animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -304,4 +305,271 @@ a small {
         width: 100%;
         /* Make buttons big and easy to click */
     }
+}
+
+.signup-text {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.rainbow-link {
+    text-decoration: none;
+    font-weight: 600;
+    color: #444;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+/* base underline animation */
+.rainbow-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    transition: width 0.3s ease;
+}
+
+/* hover effect */
+.rainbow-link:hover {
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbowMove 2s linear infinite;
+}
+
+.rainbow-link:hover::after {
+    width: 100%;
+}
+
+/* moving rainbow animation */
+@keyframes rainbowMove {
+    0% {
+        background-position: 0%
+    }
+
+    100% {
+        background-position: 200%
+    }
+}
+
+/* ensure account modal uses flex when active */
+#modal-account {
+    display: none;
+    /* default hidden */
+}
+
+/* optional: if your global overlay already handles layout, you may not need this */
+
+/* modal box styling (safe to scope) */
+#modal-account {
+    background: white;
+    padding: 25px;
+    width: 320px;
+    border-radius: 12px;
+
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    animation: pop 0.25s ease;
+}
+
+/* close button */
+#modal-account .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* inputs */
+#modal-account input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* button */
+#modal-account button {
+    width: 100%;
+    padding: 10px;
+
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+#modal-account button:hover {
+    background: #45a049;
+}
+
+/* animation */
+@keyframes pop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 1. LAYOUT & BACKGROUND (Keeps the pattern) */
+
+/* 2. THE UNIFIED DARK CARD (Glassmorphism) */
+.main-auth-card {
+    background: rgba(15, 15, 28, 0.8);
+    /* Dark base tint */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* Subtle highlight edge */
+    border-radius: 30px;
+    width: 380px;
+    padding: 40px;
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+    /* Heavy depth shadow */
+    text-align: center;
+    color: #ffffff;
+
+    /* Prepares for the blur effect */
+    transition: backdrop-filter 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+
+    /* Ensures everything stays within the card */
+    position: relative;
+    overflow: hidden;
+}
+
+/* 3. THE "HOVER AND BLUR" EFFECT */
+.main-auth-card:hover {
+    backdrop-filter: blur(15px);
+    /* Activates the blur only on hover */
+    -webkit-backdrop-filter: blur(15px);
+    border-color: rgba(255, 255, 255, 0.15);
+    /* Brightens the edge slightly */
+}
+
+/* 4. FORM SWITCHER (TABS) STYLING */
+.form-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.form-tabs span {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+}
+
+.form-tabs span:hover {
+    color: #ffffff;
+}
+
+.form-tabs span.active-tab {
+    color: #ffffff;
+    border-bottom: 2px solid #a29bfe;
+    /* Purple underline for active tab */
+}
+
+/* 5. INDIVIDUAL FORM CONTENT & TYPOGRAPHY */
+.form-content {
+    transition: opacity 0.4s ease;
+}
+
+.form-content h2 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+/* 6. INPUT FIELD STYLING (Matches image 1's rounded look) */
+.input-row {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.input-row label {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.input-row input {
+    width: 100%;
+    box-sizing: border-box;
+    /* Crucial for padding to work */
+    padding: 14px 16px;
+    border-radius: 12px;
+    /* Very rounded look */
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    /* Subtle default border */
+    background: rgba(255, 255, 255, 0.04);
+    /* Very slightly visible input background */
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-row input:focus {
+    outline: none;
+    border-color: #a29bfe;
+    /* Focusses to that light purple/periwinkle */
+    box-shadow: 0 0 12px rgba(162, 155, 254, 0.4);
+    /* Subtle purple focus glow */
+    background: rgba(255, 255, 255, 0.08);
+    /* Darkens slightly on focus */
+}
+
+/* 7. ACTION BUTTONS (Clean and consistent) */
+.auth-btn {
+    width: 100%;
+    padding: 16px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+
+    /* Default dark style matching the image 1 style */
+    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    color: white;
+    box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(108, 92, 231, 0.5);
+}
+
+/* 8. HIDDEN STATE (For JavaScript to toggle) */
+.hidden-form {
+    display: none;
 }
