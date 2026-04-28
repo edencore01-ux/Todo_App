@@ -68,7 +68,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, f"Welcome back, {user.username}!")
-            return redirect('/admin/')  # Make sure you have a URL named 'home'
+            return redirect('home')  # Make sure you have a URL named 'home'
         else:
             # If authentication fails
             messages.error(request, "Invalid username or password. Please try again.")
