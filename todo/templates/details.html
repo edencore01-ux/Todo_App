@@ -37,7 +37,7 @@ Details about {{mytodos.title}}
 
         <div class="details-footer">
             <div class="button-group">
-                <a href="{% url 'home' %}" class="back-link">Back to List</a>
+                <a href="{% url 'todo' %}" class="back-link">Back to List</a>
                 <a href="{% url 'delete_todo' mytodos.id %}" class="delete-btn"
                     onclick="return confirm('Are you sure you want to delete this?')">
                     Delete Task
