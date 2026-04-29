@@ -10,7 +10,7 @@ from .models import todos
 
 @login_required
 def todo(request):
-    mytodos = todos.objects.all().values()
+    mytodos = todos.objects.filter(user=request.user)
     template = loader.get_template('main.html')
     context = {
         'mytodos': mytodos,
