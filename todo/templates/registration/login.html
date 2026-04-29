@@ -1,0 +1,153 @@
+{% extends 'master.html' %}
+
+{% block extra_css %}
+<style>
+    /* 1. THE UNIFIED CARD */
+    .main-auth-card {
+        background: rgba(15, 15, 28, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 28px;
+        width: 380px;
+        padding: 45px;
+        margin: 50px auto; /* Centers it if the base doesn't flex */
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        text-align: center;
+        color: #ffffff;
+        transition: all 0.4s ease;
+    }
+
+    .main-auth-card:hover {
+        backdrop-filter: blur(20px);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* 2. THE TABS */
+    .form-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-bottom: 35px;
+    }
+
+    .form-tabs span {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .active-tab {
+        color: white !important;
+        border-bottom: 2px solid #a29bfe;
+    }
+
+    /* 3. INPUTS & LABELS */
+    .input-row {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .input-row label {
+        display: block;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .input-row input {
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+        box-sizing: border-box;
+    }
+
+    /* 4. BUTTONS */
+    .auth-btn {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+    }
+
+    .hidden-form {
+        display: none !important;
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<div class="main-auth-card">
+    <div class="form-tabs">
+        <span id="login-tab" class="active-tab" onclick="toggleView('login')">Login</span>
+        <span id="signup-tab" onclick="toggleView('signup')">Sign Up</span>
+    </div>
+
+    <div id="login-section">
+        <h2>Welcome Back</h2>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="input-row">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Edencore">
+            </div>
+            <div class="input-row">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="••••••••">
+            </div>
+            <button type="submit" class="auth-btn">Login</button>
+        </form>
+    </div>
+
+    <div id="signup-section" class="hidden-form">
+        <h2>Join</h2>
+        <form method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div class="input-row">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="JohnDoe">
+            </div>
+            <div class="input-row">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="email@example.com">
+            </div>
+            <div class="input-row">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Create password">
+            </div>
+            <button type="submit" class="auth-btn">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleView(view) {
+        const loginSect = document.getElementById('login-section');
+        const signupSect = document.getElementById('signup-section');
+        const loginTab = document.getElementById('login-tab');
+        const signupTab = document.getElementById('signup-tab');
+
+        if (view === 'login') {
+            loginSect.classList.remove('hidden-form');
+            signupSect.classList.add('hidden-form');
+            loginTab.classList.add('active-tab');
+            signupTab.classList.remove('active-tab');
+        } else {
+            signupSect.classList.remove('hidden-form');
+            loginSect.classList.add('hidden-form');
+            signupTab.classList.add('active-tab');
+            loginTab.classList.remove('active-tab');
+        }
+    }
+</script>
+{% endblock content %}
