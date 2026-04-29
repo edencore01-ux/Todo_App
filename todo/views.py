@@ -55,7 +55,7 @@ def edit_todo(request, id):
 @login_required
 def home(request):
     todo = todos.objects.filter(user=request.user)
-    return render(request, 'main.html', {"todo": todo})
+    return render(request, 'main.html', {"todo": items})
 def login_view(request):
     if request.method == 'POST':
         # Get the data from the 'name' attributes in your HTML
