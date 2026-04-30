@@ -302,12 +302,11 @@ a small {
     .save-btn,
     .edit-btn,
     .delete-btn {
-        max-width: 200px;
+        max-width: 50px;
         /* Make buttons big and easy to click */
     }
 
-    .container,
-    .main-auth-card {
+    .container {
         max-width: 500px;
         margin: auto;
         padding: 10px;
