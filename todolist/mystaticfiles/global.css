@@ -332,7 +332,8 @@ a small {
         border-radius: 8px;
     }
 
-    .details-card {
+    .details-card,
+    .main-auth-card {
         padding: 15px;
         border-radius: 15px;
     }
