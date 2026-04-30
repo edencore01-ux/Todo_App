@@ -302,11 +302,12 @@ a small {
     .save-btn,
     .edit-btn,
     .delete-btn {
-        width: 100%;
+        max-width: 200px;
         /* Make buttons big and easy to click */
     }
 
-    .container {
+    .container,
+    .main-auth-card {
         max-width: 500px;
         margin: auto;
         padding: 10px;
@@ -332,8 +333,7 @@ a small {
         border-radius: 8px;
     }
 
-    .details-card,
-    .main-auth-card {
+    .details-card {
         padding: 15px;
         border-radius: 15px;
     }
