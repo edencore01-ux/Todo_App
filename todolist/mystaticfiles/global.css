@@ -305,6 +305,47 @@ a small {
         width: 100%;
         /* Make buttons big and easy to click */
     }
+
+    .container {
+        max-width: 500px;
+        margin: auto;
+        padding: 10px;
+    }
+
+    h1,
+    h2 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .edit-btn,
+    .add-main-btn,
+    .delete-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    .details-card {
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .content {
+        padding: 10px;
+        font-size: 14px
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
 }
 
 .signup-text {
